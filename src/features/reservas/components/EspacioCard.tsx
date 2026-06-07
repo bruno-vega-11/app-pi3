@@ -39,8 +39,8 @@ export function EspacioCard({ espacio, onSeleccionar }: EspacioCardProps) {
           <p className="text-sm text-[#9B7B55] mt-0.5">Hasta {espacio.capacidad} personas</p>
         </div>
         <div className="ml-auto text-right flex-shrink-0">
-          <span className="text-xl font-bold text-[#C8A882]">{espacio.precio}€</span>
-          <p className="text-xs text-[#C4B09A]">por hora</p>
+          <span className="text-xl font-bold text-[#7BAF8E]">Gratis€</span>
+          <p className="text-xs text-[#C4B09A]">a todos los estudiantes de UTEC</p>
         </div>
       </div>
 

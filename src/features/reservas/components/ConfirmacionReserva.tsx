@@ -45,7 +45,7 @@ export function ConfirmacionReserva({
             {horaInicio} – {horaFin} · {personas} personas
           </p>
           <p className="text-sm font-semibold text-[#C8A882] mt-1">
-            Total: {precioTotal.toFixed(2)}€
+            ¡Reserva gratuita gracias a UTEC! 🎓
           </p>
         </div>
 
@@ -84,7 +84,7 @@ export function ConfirmacionReserva({
 
       <div className="flex justify-between items-center bg-[#C8A882]/10 rounded-2xl px-5 py-4">
         <span className="font-semibold text-[#7A5C3A]">Total a pagar</span>
-        <span className="text-2xl font-bold text-[#C8A882]">{precioTotal.toFixed(2)}€</span>
+        <span className="text-2xl font-bold text-[#7BAF8E]">¡Gratis! 🎓</span>
       </div>
 
       <div className="flex gap-3">

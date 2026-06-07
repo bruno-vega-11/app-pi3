@@ -19,7 +19,7 @@ export function ReservasPage() {
   const reserva = useReserva();
 
   return (
-    <div className="min-h-screen bg-[#FBF7F0]" style={{ fontFamily: "'Lora', Georgia, serif" }}>
+    <div className="min-h-screen bg-[#FBF7F0]" style={{ fontFamily: "'Poppins', sans-serif" }}>
 
       {/* ── Header ── */}
       <header className="bg-white border-b border-[#EDE5D8] sticky top-0 z-10">
