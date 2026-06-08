@@ -27,7 +27,7 @@ export function ReservasPage() {
           <div className="flex items-center gap-2">
             <span className="text-2xl">🫖</span>
             <div>
-              <h1 className="font-bold text-[#4A3728] text-lg leading-tight">La Meriendería</h1>
+              <h1 className="font-bold text-[#4A3728] text-lg leading-tight">Escape Utec</h1>
               <p className="text-xs text-[#C4B09A]">Reserva tu rincón favorito</p>
             </div>
           </div>
@@ -53,7 +53,7 @@ export function ReservasPage() {
           <div>
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-[#4A3728]">Elige tu espacio</h2>
-              <p className="text-[#9B7B55] mt-1">Encuentra el rincón perfecto para tu merienda</p>
+              <p className="text-[#9B7B55] mt-1">Encuentra la manta perfecta para tu escape de hoy</p>
             </div>
             <div className="grid gap-4">
               {ESPACIOS.map((espacio) => (

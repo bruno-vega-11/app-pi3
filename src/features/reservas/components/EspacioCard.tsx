@@ -60,6 +60,15 @@ export function EspacioCard({ espacio, onSeleccionar }: EspacioCardProps) {
         ))}
       </div>
 
+      {/* Foto de referencia */}
+      <div className="mb-5 overflow-hidden rounded-2xl border border-[#EDE5D8] bg-[#FAF5ED] p-3">
+        <img
+          src={espacio.foto}
+          alt={`Referencia de ${espacio.nombre}`}
+          className="w-full h-60 object-contain"
+        />
+      </div>
+
       {/* Botón */}
       <Button
         variant={espacio.disponible ? "primary" : "secondary"}

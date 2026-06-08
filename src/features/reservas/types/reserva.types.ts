@@ -7,6 +7,7 @@ export interface Espacio {
   capacidad: number;
   precio: number;        // por hora
   imagen: string;        // emoji
+  foto: string;          // imagen de referencia de la manta
   amenidades: Amenidad[];
   disponible: boolean;
   etiqueta?: string;     // "Popular", "Nuevo", etc.
