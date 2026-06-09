@@ -1,4 +1,3 @@
-// src/features/juegos/components/AudioGame.tsx
 import { useState, useEffect, useRef } from "react";
 import { AUDIO_CONFIG } from "../data/juegos.data";
 
@@ -10,17 +9,45 @@ interface AudioGameProps {
 
 export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
   const [playing, setPlaying] = useState(false);
-  const [clueIdx, setClueIdx] = useState(0);
   const [bars, setBars] = useState<number[]>(() => Array.from({ length: 24 }, () => Math.random() * 18 + 7));
   const [selected, setSelected] = useState<string | null>(alreadyDone ? AUDIO_CONFIG.correctId : null);
   const [answered, setAnswered] = useState(alreadyDone);
+  const [audioError, setAudioError] = useState(false);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const clueRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const vinylRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const rotationRef = useRef(0);
   const rafRef = useRef<number | null>(null);
 
-  // Animate vinyl via requestAnimationFrame to avoid CSS animation class issues
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    setAudioError(false);
+    audio.load();
+
+    const onPlay = () => setPlaying(true);
+    const onPause = () => setPlaying(false);
+    const onEnded = () => setPlaying(false);
+    const onError = () => setAudioError(true);
+    const onCanPlay = () => setAudioError(false);
+
+    audio.addEventListener("play", onPlay);
+    audio.addEventListener("pause", onPause);
+    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("error", onError);
+    audio.addEventListener("canplaythrough", onCanPlay);
+
+    return () => {
+      audio.removeEventListener("play", onPlay);
+      audio.removeEventListener("pause", onPause);
+      audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener("error", onError);
+      audio.removeEventListener("canplaythrough", onCanPlay);
+      audio.pause();
+    };
+  }, []);
+
   useEffect(() => {
     if (playing) {
       const spin = () => {
@@ -35,25 +62,37 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
       tickRef.current = setInterval(() => {
         setBars(Array.from({ length: 24 }, () => Math.random() * 22 + 6));
       }, 110);
-
-      clueRef.current = setInterval(() => {
-        setClueIdx((i) => Math.min(i + 1, AUDIO_CONFIG.clues.length - 1));
-      }, 2500);
     } else {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (tickRef.current) clearInterval(tickRef.current);
-      if (clueRef.current) clearInterval(clueRef.current);
       setBars(Array.from({ length: 24 }, () => Math.random() * 18 + 7));
     }
+
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (tickRef.current) clearInterval(tickRef.current);
-      if (clueRef.current) clearInterval(clueRef.current);
     };
   }, [playing]);
 
+  const togglePlay = async () => {
+    const audio = audioRef.current;
+    if (!audio || audioError) return;
+
+    if (playing) {
+      audio.pause();
+      return;
+    }
+
+    try {
+      await audio.play();
+    } catch {
+      setAudioError(true);
+    }
+  };
+
   const pick = (id: string) => {
     if (answered) return;
+    audioRef.current?.pause();
     setSelected(id);
     setAnswered(true);
     if (id !== AUDIO_CONFIG.correctId) {
@@ -84,10 +123,11 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
   };
 
   return (
-    <div className="flex flex-col flex-1 min-h-screen bg-[#FBF7F0]">
-      {/* Header */}
+    <div className="flex flex-col flex-1">
+      <audio ref={audioRef} src={AUDIO_CONFIG.audioSrc} preload="metadata" />
+
       <header className="bg-white border-b border-[#EDE5D8] sticky top-0 z-10">
-        <div className="px-4 py-3 flex items-center justify-between">
+        <div className="px-4 md:px-8 py-3 md:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xl">🎵</span>
             <div>
@@ -96,7 +136,10 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
             </div>
           </div>
           <button
-            onClick={onBack}
+            onClick={() => {
+              audioRef.current?.pause();
+              onBack();
+            }}
             className="border border-[#D5C5B0] rounded-xl px-3 py-1.5 text-xs font-semibold text-[#7A5C3A] hover:bg-[#F5EEE4] hover:border-[#C8A882] transition-all cursor-pointer"
             style={{ background: "white", fontFamily: "'Poppins', sans-serif" }}
           >
@@ -105,8 +148,7 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-5 space-y-4 overflow-y-auto">
-        {/* Badge */}
+      <main className="flex-1 px-4 md:px-8 py-5 md:py-8 space-y-4 overflow-y-auto w-full max-w-2xl mx-auto">
         <div
           className="rounded-2xl px-4 py-2.5 flex items-center gap-2 flex-wrap"
           style={{ background: "#F5E6C8", border: "1.5px dashed #C8A882" }}
@@ -119,22 +161,24 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
 
         <div>
           <h2 className="text-base font-bold text-[#4A3728]">¿De qué obra hablan?</h2>
-          <p className="text-xs text-[#9B7B55] mt-0.5">Escucha la descripción del curador y adivina</p>
+          <p className="text-xs text-[#9B7B55] mt-0.5">{AUDIO_CONFIG.description}</p>
         </div>
 
-        {/* Player */}
         <div className="bg-white rounded-2xl p-5 border border-[#E5D9C4] text-center">
-          {/* Vinyl */}
           <div
             ref={vinylRef}
-            onClick={() => setPlaying((p) => !p)}
+            onClick={togglePlay}
             className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer"
-            style={{ background: "#4A3728", boxShadow: playing ? "0 0 0 8px #F5E6C8" : "none", transition: "box-shadow 0.3s" }}
+            style={{
+              background: "#4A3728",
+              boxShadow: playing ? "0 0 0 8px #F5E6C8" : "none",
+              transition: "box-shadow 0.3s",
+              opacity: audioError ? 0.5 : 1,
+            }}
           >
             <div className="w-7 h-7 rounded-full" style={{ background: "#C8A882" }} />
           </div>
 
-          {/* Waveform */}
           <div className="flex items-center gap-0.5 justify-center mb-3" style={{ height: 36 }}>
             {bars.map((h, i) => (
               <div
@@ -146,14 +190,22 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
           </div>
 
           <p className="text-xs text-[#9B7B55] mb-1">
-            {playing ? "▐▐ Reproduciendo…" : "Toca el disco para escuchar"}
+            {audioError
+              ? "No se pudo cargar el audio"
+              : playing
+                ? "▐▐ Reproduciendo…"
+                : "Toca el disco para escuchar"}
           </p>
-          <p className="text-sm font-semibold text-[#4A3728]" style={{ fontStyle: "italic" }}>
-            {AUDIO_CONFIG.clues[clueIdx]}
-          </p>
+
+          {audioError && (
+            <p className="text-xs text-[#8B3A34] mt-1">
+              No se encontró el archivo. Debe estar en{" "}
+              <code className="text-[10px]">public/audio/</code> y la ruta debe ser{" "}
+              <code className="text-[10px]">{AUDIO_CONFIG.audioSrc}</code>
+            </p>
+          )}
         </div>
 
-        {/* Message */}
         {answered && (
           <div
             className="rounded-2xl px-4 py-2.5 text-sm font-medium text-center"
@@ -165,7 +217,6 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
           </div>
         )}
 
-        {/* Options */}
         <div className="grid grid-cols-2 gap-2.5">
           {AUDIO_CONFIG.options.map((opt) => (
             <button

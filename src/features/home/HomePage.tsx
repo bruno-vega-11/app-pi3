@@ -14,8 +14,8 @@ export function HomePage({ completedCount, allDone, onGoReservas, onGoJuegos }: 
   return (
     <div className="flex flex-col flex-1">
       {/* Header */}
-      <header className="bg-white border-b border-[#EDE5D8] sticky top-0 z-10">
-        <div className="px-4 py-3 flex items-center gap-2">
+      <header className="bg-white border-b border-[#EDE5D8] sticky top-0 z-10 lg:hidden">
+        <div className="px-4 md:px-8 py-3 md:py-4 flex items-center gap-2">
           <span className="text-2xl">🏛️</span>
           <div>
             <h1 className="font-bold text-[#4A3728] text-lg leading-tight">MAC UTEC</h1>
@@ -24,15 +24,15 @@ export function HomePage({ completedCount, allDone, onGoReservas, onGoJuegos }: 
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-6 space-y-4">
+      <main className="flex-1 px-4 md:px-8 py-6 md:py-8 space-y-4 md:space-y-6">
         {/* Saludo */}
         <div>
-          <h2 className="text-2xl font-bold text-[#4A3728]">Hola, visitante 👋</h2>
-          <p className="text-sm text-[#9B7B55] mt-1">¿Qué quieres hacer hoy en el MAC?</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#4A3728]">Hola, visitante 👋</h2>
+          <p className="text-sm md:text-base text-[#9B7B55] mt-1">¿Qué quieres hacer hoy en el MAC?</p>
         </div>
 
         {/* Estado del reto diario */}
-        <div className="bg-[#FBF5EC] rounded-2xl p-4 border border-[#EDE5D8]">
+        <div className="bg-[#FBF5EC] rounded-2xl p-4 md:p-5 border border-[#EDE5D8]">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold text-[#7A5C3A]">🎯 Reto del día</span>
             <span className="text-xs text-[#C4B09A]">{today}</span>
@@ -47,43 +47,45 @@ export function HomePage({ completedCount, allDone, onGoReservas, onGoJuegos }: 
           </p>
         </div>
 
-        {/* Tarjeta Reservas */}
-        <button
-          onClick={onGoReservas}
-          className="w-full text-left bg-white rounded-3xl p-5 border border-[#E5D9C4] hover:border-[#C8A882] hover:shadow-lg transition-all duration-200 cursor-pointer"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          <div className="text-4xl mb-2">🪑</div>
-          <h3 className="text-lg font-bold text-[#4A3728]">Reservar un espacio</h3>
-          <p className="text-sm text-[#9B7B55] mt-1 leading-relaxed">
-            Elige tu rincón favorito en el MAC para relajarte y disfrutar.
-          </p>
-          <span className="inline-block mt-3 bg-[#D8ECD4] text-[#3D6B35] text-xs font-semibold px-3 py-1 rounded-full">
-            Disponible ahora
-          </span>
-        </button>
-
-        {/* Tarjeta Juegos */}
-        <button
-          onClick={onGoJuegos}
-          className="w-full text-left bg-white rounded-3xl p-5 border border-[#E5D9C4] hover:border-[#C8A882] hover:shadow-lg transition-all duration-200 cursor-pointer"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          <div className="text-4xl mb-2">🧩</div>
-          <h3 className="text-lg font-bold text-[#4A3728]">Juego del día</h3>
-          <p className="text-sm text-[#9B7B55] mt-1 leading-relaxed">
-            Descubre las obras del MAC resolviendo acertijos y gana premios.
-          </p>
-          <span
-            className={`inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full ${
-              allDone ? "bg-[#D8ECD4] text-[#3D6B35]" : "bg-[#F5E6C8] text-[#8A6030]"
-            }`}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Tarjeta Reservas */}
+          <button
+            onClick={onGoReservas}
+            className="w-full text-left bg-white rounded-3xl p-5 md:p-6 border border-[#E5D9C4] hover:border-[#C8A882] hover:shadow-lg transition-all duration-200 cursor-pointer"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            {allDone
-              ? "¡Completo! 🎉"
-              : `${pending} reto${pending !== 1 ? "s" : ""} pendiente${pending !== 1 ? "s" : ""}`}
-          </span>
-        </button>
+            <div className="text-4xl mb-2">🪑</div>
+            <h3 className="text-lg font-bold text-[#4A3728]">Reservar un espacio</h3>
+            <p className="text-sm text-[#9B7B55] mt-1 leading-relaxed">
+              Elige tu rincón favorito en el MAC para relajarte y disfrutar.
+            </p>
+            <span className="inline-block mt-3 bg-[#D8ECD4] text-[#3D6B35] text-xs font-semibold px-3 py-1 rounded-full">
+              Disponible ahora
+            </span>
+          </button>
+
+          {/* Tarjeta Juegos */}
+          <button
+            onClick={onGoJuegos}
+            className="w-full text-left bg-white rounded-3xl p-5 md:p-6 border border-[#E5D9C4] hover:border-[#C8A882] hover:shadow-lg transition-all duration-200 cursor-pointer"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            <div className="text-4xl mb-2">🧩</div>
+            <h3 className="text-lg font-bold text-[#4A3728]">Juego del día</h3>
+            <p className="text-sm text-[#9B7B55] mt-1 leading-relaxed">
+              Descubre las obras del MAC resolviendo acertijos y gana premios.
+            </p>
+            <span
+              className={`inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full ${
+                allDone ? "bg-[#D8ECD4] text-[#3D6B35]" : "bg-[#F5E6C8] text-[#8A6030]"
+              }`}
+            >
+              {allDone
+                ? "¡Completo! 🎉"
+                : `${pending} reto${pending !== 1 ? "s" : ""} pendiente${pending !== 1 ? "s" : ""}`}
+            </span>
+          </button>
+        </div>
       </main>
     </div>
   );

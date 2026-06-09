@@ -87,7 +87,7 @@ export function PremioScreen({ onBack }: PremioScreenProps) {
   return (
     <div className="flex flex-col flex-1">
       {/* Header */}
-      <header className="bg-white border-b border-[#EDE5D8] px-4 py-3 flex items-center gap-2 sticky top-0 z-10">
+      <header className="bg-white border-b border-[#EDE5D8] px-4 md:px-8 py-3 md:py-4 flex items-center gap-2 sticky top-0 z-10">
         <span className="text-xl">🏆</span>
         <div>
           <h1 className="font-bold text-[#4A3728] text-base leading-tight">¡Premio!</h1>
@@ -95,7 +95,7 @@ export function PremioScreen({ onBack }: PremioScreenProps) {
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-6 overflow-y-auto">
+      <main className="flex-1 px-4 md:px-8 py-6 md:py-8 overflow-y-auto w-full max-w-2xl mx-auto">
         <div className="text-center space-y-4">
           {/* Confetti */}
           <div className="text-5xl" style={{ animation: "bob 0.7s ease-in-out infinite alternate" }}>🎉</div>

@@ -25,12 +25,9 @@ export const FOTO_CONFIG = {
 };
 
 export const AUDIO_CONFIG = {
-  clues: [
-    '"Una obra que desafía la percepción del espacio…"',
-    '"El artista captura el movimiento del agua y la luz…"',
-    '"Colores que evocan el océano peruano en tempestad…"',
-    '"Una de las obras más emblemáticas del MAC UTEC…"',
-  ],
+  // Archivo en public/audio/ → ruta web: /audio/nombre-del-archivo.mp3
+  audioSrc: "/audio/music.mp3",
+  description: "Escucha el audio del curador e identifica de qué obra se trata.",
   correctId: "a",
   options: [
     { id: "a", label: "Mareas de Luz",       sublabel: "Fernando de Szyszlo" },

@@ -24,68 +24,80 @@ function App() {
 
   return (
     <div
-      className="min-h-screen bg-[#FBF7F0] flex flex-col"
-      style={{ fontFamily: "'Poppins', sans-serif", maxWidth: 480, margin: "0 auto" }}
+      className="min-h-screen bg-[#F0E8DC]"
+      style={{ fontFamily: "'Poppins', sans-serif" }}
     >
-      <div className="flex-1 flex flex-col">
-
-        {screen === "home" && (
-          <HomePage
-            completedCount={juegos.completedCount}
-            allDone={juegos.allDone}
-            onGoReservas={() => goTo("reservas")}
-            onGoJuegos={() => goTo("juegos")}
-          />
+      <div className="flex min-h-screen">
+        {!isGameScreen && (
+          <BottomNav variant="sidebar" active={activeTab} onSelect={(tab) => goTo(tab)} />
         )}
 
-        {screen === "reservas" && <ReservasPage />}
+        <div className="flex-1 flex flex-col min-h-screen bg-[#FBF7F0] min-w-0">
+          <div className="flex-1 flex flex-col w-full max-w-5xl mx-auto">
+            {screen === "home" && (
+              <HomePage
+                completedCount={juegos.completedCount}
+                allDone={juegos.allDone}
+                onGoReservas={() => goTo("reservas")}
+                onGoJuegos={() => goTo("juegos")}
+              />
+            )}
 
-        {screen === "juegos" && (
-          <JuegosHub
-            done={juegos.done}
-            allDone={juegos.allDone}
-            onGoWordle={() => goTo("wordle")}
-            onGoFoto={() => goTo("foto")}
-            onGoAudio={() => goTo("audio")}
-            onGoPremio={() => goTo("premio")}
-            onBack={() => goTo("home")}
-          />
-        )}
+            {screen === "reservas" && <ReservasPage />}
 
-        {screen === "wordle" && (
-          <WordleGame
-            alreadyDone={juegos.done.wordle}
-            onComplete={() => { juegos.complete("wordle"); goTo("juegos"); }}
-            onBack={() => goTo("juegos")}
-          />
-        )}
+            {screen === "juegos" && (
+              <JuegosHub
+                done={juegos.done}
+                allDone={juegos.allDone}
+                onGoWordle={() => goTo("wordle")}
+                onGoFoto={() => goTo("foto")}
+                onGoAudio={() => goTo("audio")}
+                onGoPremio={() => goTo("premio")}
+                onBack={() => goTo("home")}
+              />
+            )}
 
-        {screen === "foto" && (
-          <FotoGame
-            alreadyDone={juegos.done.foto}
-            onComplete={() => { juegos.complete("foto"); goTo("juegos"); }}
-            onBack={() => goTo("juegos")}
-          />
-        )}
+            {screen === "wordle" && (
+              <WordleGame
+                alreadyDone={juegos.done.wordle}
+                onComplete={() => {
+                  juegos.complete("wordle");
+                  goTo("juegos");
+                }}
+                onBack={() => goTo("juegos")}
+              />
+            )}
 
-        {screen === "audio" && (
-          <AudioGame
-            alreadyDone={juegos.done.audio}
-            onComplete={() => { juegos.complete("audio"); goTo("juegos"); }}
-            onBack={() => goTo("juegos")}
-          />
-        )}
+            {screen === "foto" && (
+              <FotoGame
+                alreadyDone={juegos.done.foto}
+                onComplete={() => {
+                  juegos.complete("foto");
+                  goTo("juegos");
+                }}
+                onBack={() => goTo("juegos")}
+              />
+            )}
 
-        {screen === "premio" && (
-          <PremioScreen onBack={() => goTo("home")} />
-        )}
+            {screen === "audio" && (
+              <AudioGame
+                alreadyDone={juegos.done.audio}
+                onComplete={() => {
+                  juegos.complete("audio");
+                  goTo("juegos");
+                }}
+                onBack={() => goTo("juegos")}
+              />
+            )}
 
+            {screen === "premio" && <PremioScreen onBack={() => goTo("home")} />}
+          </div>
+
+          {!isGameScreen && (
+            <BottomNav variant="bottom" active={activeTab} onSelect={(tab) => goTo(tab)} />
+          )}
+        </div>
       </div>
-
-      {/* Bottom nav solo en pantallas principales */}
-      {!isGameScreen && (
-        <BottomNav active={activeTab} onSelect={(tab) => goTo(tab)} />
-      )}
     </div>
   );
 }

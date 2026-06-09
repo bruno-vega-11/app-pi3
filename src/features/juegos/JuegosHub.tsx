@@ -55,7 +55,7 @@ export function JuegosHub({ done, allDone, onGoWordle, onGoFoto, onGoAudio, onGo
     <div className="flex flex-col flex-1">
       {/* Header */}
       <header className="bg-white border-b border-[#EDE5D8] sticky top-0 z-10">
-        <div className="px-4 py-3 flex items-center justify-between">
+        <div className="px-4 md:px-8 py-3 md:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xl">🎯</span>
             <div>
@@ -73,13 +73,13 @@ export function JuegosHub({ done, allDone, onGoWordle, onGoFoto, onGoAudio, onGo
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-6 space-y-4">
+      <main className="flex-1 px-4 md:px-8 py-6 md:py-8 space-y-4 md:space-y-6">
         <div>
-          <h2 className="text-lg font-bold text-[#4A3728]">Acertijos de hoy</h2>
-          <p className="text-xs text-[#9B7B55] mt-0.5">Completa los 3 para ganar tu premio 🏆</p>
+          <h2 className="text-lg md:text-xl font-bold text-[#4A3728]">Acertijos de hoy</h2>
+          <p className="text-xs md:text-sm text-[#9B7B55] mt-0.5">Completa los 3 para ganar tu premio 🏆</p>
         </div>
 
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <GameCard
             iconEmoji="🔤" iconBg="#F5E6C8"
             name="Wordle del MAC" hint="Adivina el nombre de la obra"
@@ -100,7 +100,7 @@ export function JuegosHub({ done, allDone, onGoWordle, onGoFoto, onGoAudio, onGo
         {allDone && (
           <button
             onClick={onGoPremio}
-            className="w-full text-white font-bold py-3.5 rounded-2xl transition-all duration-200 text-sm cursor-pointer border-none"
+            className="w-full md:max-w-md md:mx-auto block text-white font-bold py-3.5 rounded-2xl transition-all duration-200 text-sm cursor-pointer border-none"
             style={{ background: "#7BAF8E", fontFamily: "'Poppins', sans-serif" }}
           >
             🎁 ¡Reclamar mi premio!

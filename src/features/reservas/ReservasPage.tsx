@@ -19,11 +19,11 @@ export function ReservasPage() {
   const reserva = useReserva();
 
   return (
-    <div className="min-h-screen bg-[#FBF7F0]" style={{ fontFamily: "'Poppins', sans-serif" }}>
+    <div className="flex flex-col flex-1" style={{ fontFamily: "'Poppins', sans-serif" }}>
 
       {/* ── Header ── */}
       <header className="bg-white border-b border-[#EDE5D8] sticky top-0 z-10">
-        <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="px-4 md:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🫖</span>
             <div>
@@ -39,7 +39,7 @@ export function ReservasPage() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-4 py-8">
+      <main className="flex-1 px-4 md:px-8 py-6 md:py-8 w-full">
 
         {/* Step indicator */}
         {!reserva.reservaCompletada && (
@@ -55,7 +55,7 @@ export function ReservasPage() {
               <h2 className="text-2xl font-bold text-[#4A3728]">Elige tu espacio</h2>
               <p className="text-[#9B7B55] mt-1">Encuentra la manta perfecta para tu escape de hoy</p>
             </div>
-            <div className="grid gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               {ESPACIOS.map((espacio) => (
                 <EspacioCard
                   key={espacio.id}
