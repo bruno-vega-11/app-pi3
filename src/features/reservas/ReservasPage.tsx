@@ -95,11 +95,8 @@ export function ReservasPage() {
                   <HorarioSelector
                     horaInicio={reserva.horaInicio}
                     horaFin={reserva.horaFin}
-                    personas={reserva.personas}
-                    capacidadMaxima={reserva.espacioSeleccionado.capacidad}
                     onCambioInicio={reserva.setHoraInicioDirecto}
                     onCambioFin={reserva.setHoraFinDirecto}
-                    onCambioPersonas={reserva.setPersonasDirecto}
                   />
                 </div>
               )}
@@ -148,7 +145,6 @@ export function ReservasPage() {
               fecha={reserva.fecha}
               horaInicio={reserva.horaInicio}
               horaFin={reserva.horaFin}
-              personas={reserva.personas}
               formData={reserva.formData}
               precioTotal={reserva.calcularPrecio()}
               completada={reserva.reservaCompletada}
