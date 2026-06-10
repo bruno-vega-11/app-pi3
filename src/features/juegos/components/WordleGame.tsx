@@ -87,7 +87,7 @@ export function WordleGame({ alreadyDone, onComplete, onBack }: WordleGameProps)
         const cur = next[l];
         if (cur === "correct") return;
         if (result[i] === "correct") next[l] = "correct";
-        else if (result[i] === "present" && cur !== "correct") next[l] = "present";
+        else if (result[i] === "present") next[l] = "present";
         else if (!cur) next[l] = "absent";
       });
       return next;
