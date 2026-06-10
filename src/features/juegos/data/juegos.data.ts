@@ -26,7 +26,7 @@ export const FOTO_CONFIG = {
 
 export const AUDIO_CONFIG = {
   // Archivo en public/audio/ → ruta web: /audio/nombre-del-archivo.mp3
-  audioSrc: "/audio/music.mp3",
+  audioSrc: "/audio/audio.mp3",
   description: "Escucha el audio del curador e identifica de qué obra se trata.",
   correctId: "a",
   options: [
