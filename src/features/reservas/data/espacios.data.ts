@@ -1,14 +1,14 @@
 import type { Espacio } from "../types/reserva.types";
-import fotoMantaRoja from "../../../images/manta.png";
+import fotoMantaRoja from "../../../images/manta.jpg";
 import fotoMantaAzul from "../../../images/manta3.jpg";
-import fotoMantaVerde from "../../../images/manta2.png";
-import fotoMantaAmarilla from "../../../images/manta4.png";
+import fotoMantaVerde from "../../../images/manta2.jpg";
+import fotoMantaAmarilla from "../../../images/manta4.jpg";
 
 export const ESPACIOS: Espacio[] = [
   {
     id: "1",
     nombre: "Manta Pequeña",
-    descripcion: "Tamaño: 1,5 m × 2 m. Manta compacta y ligera. Ideal para tomar un café entre clases o descansar a la sombra. Perfecta para grupos pequeños.",
+    descripcion: "Tamaño: 1,5 m × 2 m. Manta compacta y ligera inspirada en la obra de arte 'Gente en la calle III' de Antonio Seguí. Ideal para tomar un café entre clases o descansar a la sombra. Perfecta para grupos pequeños.",
     capacidad: 4,
     precio: 0,
     imagen: "🧺",
@@ -20,7 +20,7 @@ export const ESPACIOS: Espacio[] = [
   {
     id: "2",
     nombre: "Manta Mediana",
-    descripcion: "Tamaño: 1,8 m × 2 m. Manta compacta y ligera. Ideal para tomar un café entre clases o descansar a la sombra. Perfecta para grupos medianos.",
+    descripcion: "Tamaño: 1,8 m × 2 m. Manta compacta y ligera inspirada en la obra de arte 'Ucayali Políptico' de Nicole Franchy. Ideal para tomar un café entre clases o descansar a la sombra. Perfecta para grupos medianos.",
     capacidad: 4,
     precio: 0,
     imagen: "🌿",
@@ -31,7 +31,7 @@ export const ESPACIOS: Espacio[] = [
   {
     id: "3",
     nombre: "Manta Grande",
-    descripcion: "Tamaño: 2 m × 2,5 m. Manta amplia.  Ideal para tomar un café entre clases o descansar a la sombra. Perfecta para grupos grandes.",
+    descripcion: "Tamaño: 2 m × 2,5 m. Manta amplia inspirada en la obra de arte 'Tres cholos durmiendo' de Moico Yaker. Ideal para tomar un café entre clases o descansar a la sombra. Perfecta para grupos grandes.",
     capacidad: 6,
     precio: 0,
     imagen: "🌳",
@@ -42,7 +42,7 @@ export const ESPACIOS: Espacio[] = [
   {
     id: "4",
     nombre: "Manta Grande",
-    descripcion: "Tamaño: 2 m × 2,5 m. Manta amplia.  Ideal para tomar un café entre clases o descansar a la sombra. Perfecta para grupos grandes.",
+    descripcion: "Tamaño: 2 m × 2,5 m. Manta amplia inspirada en la obra e arte de 'Es mejor ser rico quee pobre' de Miguel Angel Rojas.  Ideal para tomar un café entre clases o descansar a la sombra. Perfecta para grupos grandes.",
     capacidad: 6,
     precio: 0,
     imagen: "⛺",

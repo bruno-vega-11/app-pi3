@@ -24,16 +24,21 @@ export const FOTO_CONFIG = {
     'El estudiante debía fotografiar una obra de arte en el MAC UTEC (Museo de Arte Contemporáneo). ¿La imagen muestra claramente una obra de arte: pintura, escultura o instalación artística? Responde SOLO con JSON sin markdown: {"esObra":true,"mensaje":"1 oración en español felicitando al estudiante"}',
 };
 
+import audioLatente from "../../../audios/Generated Audio June 17, 2026 - 10_51AM.wav";
+import latenteObra from "../../../images/latenteobra.jpg";
+
 export const AUDIO_CONFIG = {
-  // Archivo en public/audio/ → ruta web: /audio/nombre-del-archivo.mp3
-  audioSrc: "/audio/audio.mp3",
+  audioSrc: audioLatente,
   description: "Escucha el audio del curador e identifica de qué obra se trata.",
   correctId: "a",
+  artworkSrc: latenteObra,
+  funFact:
+    "Esta pintura juega con tu mente. Si te acercas muchísimo al lienzo, verás que los edificios desaparecen y solo quedan manchas de pintura al óleo abstractas y gruesas. Sin embargo, al dar unos pasos hacia atrás, tu cerebro mágicamente une todos esos colores para construir las calles, las casas y el gran estadio.",
   options: [
-    { id: "a", label: "Mareas de Luz",       sublabel: "Fernando de Szyszlo" },
-    { id: "b", label: "Paisaje Andino",      sublabel: "Jorge Vinatea"        },
-    { id: "c", label: "Abstracción Costera", sublabel: "Ricardo Grau"         },
-    { id: "d", label: "Espacio Infinito",    sublabel: "Héctor Velarde"        },
+    { id: "a", label: "Latente",              sublabel: "Victor Zuñiga Aedo" },
+    { id: "b", label: "Paisaje Andino",       sublabel: "Jorge Vinatea"       },
+    { id: "c", label: "Abstracción Costera",  sublabel: "Ricardo Grau"        },
+    { id: "d", label: "Espacio Infinito",     sublabel: "Héctor Velarde"      },
   ],
 };
 
