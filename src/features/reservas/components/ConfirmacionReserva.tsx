@@ -16,7 +16,7 @@ interface ConfirmacionReservaProps {
 
 export function ConfirmacionReserva({
   espacio, fecha, horaInicio, horaFin, formData,
-  precioTotal, completada, onConfirmar, onVolver, onNuevaReserva,
+  completada, onConfirmar, onVolver, onNuevaReserva,
 }: ConfirmacionReservaProps) {
   const formatearFecha = (iso: string) => {
     const d = new Date(iso + "T00:00:00");
