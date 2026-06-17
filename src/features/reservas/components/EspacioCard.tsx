@@ -11,7 +11,7 @@ interface EspacioCardProps {
 export function EspacioCard({ espacio, onSeleccionar }: EspacioCardProps) {
   return (
     <div
-      className={`relative bg-white rounded-3xl p-6 border transition-all duration-300 group ${
+      className={`relative bg-white rounded-3xl p-4 sm:p-6 border transition-all duration-300 group overflow-hidden ${
         espacio.disponible
           ? "border-[#E5D9C4] hover:border-[#C8A882] hover:shadow-lg cursor-pointer"
           : "border-[#EEE8E0] opacity-60"
@@ -30,17 +30,21 @@ export function EspacioCard({ espacio, onSeleccionar }: EspacioCardProps) {
       )}
 
       {/* Header */}
-      <div className="flex items-start gap-4 mb-4">
-        <div className="w-14 h-14 bg-[#FBF5EC] rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+      <div className="flex items-start gap-3 sm:gap-4 mb-4">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FBF5EC] rounded-2xl flex items-center justify-center text-2xl sm:text-3xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
           {espacio.imagen}
         </div>
-        <div>
-          <h3 className="font-semibold text-[#4A3728] text-lg leading-tight">{espacio.nombre}</h3>
-          <p className="text-sm text-[#9B7B55] mt-0.5">Hasta {espacio.capacidad} personas</p>
-        </div>
-        <div className="ml-auto text-right flex-shrink-0">
-          <span className="text-xl font-bold text-[#7BAF8E]">Gratis€</span>
-          <p className="text-xs text-[#C4B09A]">a todos los estudiantes de UTEC</p>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+            <div className="min-w-0">
+              <h3 className="font-semibold text-[#4A3728] text-base sm:text-lg leading-tight">{espacio.nombre}</h3>
+              <p className="text-sm text-[#9B7B55] mt-0.5">Hasta {espacio.capacidad} personas</p>
+            </div>
+            <div className="inline-flex flex-col self-start rounded-xl bg-[#D8ECD4]/40 px-3 py-1.5 sm:text-right sm:shrink-0">
+              <span className="text-base sm:text-xl font-bold text-[#7BAF8E] leading-tight">Gratis</span>
+              <p className="text-[11px] sm:text-xs text-[#7A6A58] leading-snug">Para estudiantes UTEC</p>
+            </div>
+          </div>
         </div>
       </div>
 

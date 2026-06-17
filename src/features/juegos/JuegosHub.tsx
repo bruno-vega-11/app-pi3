@@ -81,13 +81,13 @@ export function JuegosHub({ done, allDone, onGoWordle, onGoFoto, onGoAudio, onGo
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <GameCard
-            iconEmoji="🔤" iconBg="#F5E6C8"
-            name="Wordle del MAC" hint="Adivina el nombre de la obra"
+            iconEmoji="🎯" iconBg="#F5E6C8"
+            name="Ahorcado del MAC" hint="Adivina el nombre completo de la obra"
             done={done.wordle} onClick={onGoWordle}
           />
           <GameCard
-            iconEmoji="📸" iconBg="#D8ECD4"
-            name="Captura la obra" hint="Fotografía y verifica con IA"
+            iconEmoji="🖼️" iconBg="#D8ECD4"
+            name="¿Qué obra es?" hint="Identifica la pieza con zoom progresivo"
             done={done.foto} onClick={onGoFoto}
           />
           <GameCard

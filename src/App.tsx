@@ -2,8 +2,8 @@ import { useState } from "react";
 import { HomePage } from "./features/home/HomePage";
 import { ReservasPage } from "./features/reservas/ReservasPage";
 import { JuegosHub } from "./features/juegos/JuegosHub";
-import { WordleGame } from "./features/juegos/components/WordleGame";
-import { FotoGame } from "./features/juegos/components/FotoGame";
+import { AhorcadoGame } from "./features/juegos/components/AhorcadoGame";
+import { ObraZoomGame } from "./features/juegos/components/ObraZoomGame";
 import { AudioGame } from "./features/juegos/components/AudioGame";
 import { PremioScreen } from "./features/juegos/components/PremioScreen";
 import { BottomNav } from "./features/components/ui/BottomNav";
@@ -58,7 +58,7 @@ function App() {
             )}
 
             {screen === "wordle" && (
-              <WordleGame
+              <AhorcadoGame
                 alreadyDone={juegos.done.wordle}
                 onComplete={() => {
                   juegos.complete("wordle");
@@ -69,7 +69,7 @@ function App() {
             )}
 
             {screen === "foto" && (
-              <FotoGame
+              <ObraZoomGame
                 alreadyDone={juegos.done.foto}
                 onComplete={() => {
                   juegos.complete("foto");

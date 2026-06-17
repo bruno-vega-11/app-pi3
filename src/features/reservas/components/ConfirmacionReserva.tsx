@@ -17,7 +17,7 @@ interface ConfirmacionReservaProps {
 
 export function ConfirmacionReserva({
   espacio, fecha, horaInicio, horaFin, personas, formData,
-  precioTotal, completada, onConfirmar, onVolver, onNuevaReserva,
+  completada, onConfirmar, onVolver, onNuevaReserva,
 }: ConfirmacionReservaProps) {
   const formatearFecha = (iso: string) => {
     const d = new Date(iso + "T00:00:00");
@@ -58,9 +58,9 @@ export function ConfirmacionReserva({
 
   // ── Resumen antes de confirmar ─────────────────────────────────────────────
   const fila = (label: string, valor: string) => (
-    <div className="flex justify-between py-2.5 border-b border-[#EDE5D8] last:border-0">
-      <span className="text-sm text-[#9B7B55]">{label}</span>
-      <span className="text-sm font-medium text-[#4A3728]">{valor}</span>
+    <div className="flex justify-between items-start gap-3 py-2.5 border-b border-[#EDE5D8] last:border-0">
+      <span className="text-sm text-[#9B7B55] shrink-0">{label}</span>
+      <span className="text-sm font-medium text-[#4A3728] text-right break-words min-w-0">{valor}</span>
     </div>
   );
 
@@ -82,9 +82,9 @@ export function ConfirmacionReserva({
         {formData.nota && fila("Nota", formData.nota)}
       </div>
 
-      <div className="flex justify-between items-center bg-[#C8A882]/10 rounded-2xl px-5 py-4">
-        <span className="font-semibold text-[#7A5C3A]">Total a pagar</span>
-        <span className="text-2xl font-bold text-[#7BAF8E]">¡Gratis! 🎓</span>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-3 bg-[#C8A882]/10 rounded-2xl px-4 sm:px-5 py-3 sm:py-4">
+        <span className="font-semibold text-[#7A5C3A] text-sm sm:text-base">Total a pagar</span>
+        <span className="text-xl sm:text-2xl font-bold text-[#7BAF8E]">¡Gratis! 🎓</span>
       </div>
 
       <div className="flex gap-3">

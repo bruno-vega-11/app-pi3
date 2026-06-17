@@ -38,7 +38,7 @@ export function HomePage({ completedCount, allDone, onGoReservas, onGoJuegos }: 
             <span className="text-xs text-[#C4B09A]">{today}</span>
           </div>
           <span className="inline-block bg-[#C8A882] text-white text-xs font-bold px-3 py-1 rounded-full">
-            Wordle + Foto + Audio
+            Ahorcado + Obra + Audio
           </span>
           <p className="text-xs text-[#9B7B55] mt-2 leading-relaxed">
             {allDone
