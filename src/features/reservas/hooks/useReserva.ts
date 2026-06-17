@@ -15,7 +15,7 @@ export function useReserva() {
   const [personas, setPersonas]                       = useState<number>(2);
   const [formData, setFormData]                       = useState<Partial<ReservaFormData>>({});
   const [reservaCompletada, setReservaCompletada]     = useState(false);
-
+  
   const pasoIndex = PASOS.indexOf(paso);
 
   const siguiente = () => {
