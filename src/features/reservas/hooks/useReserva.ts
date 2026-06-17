@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "emailjs-com"
 import type { Espacio, PasoReserva, ReservaFormData } from "../types/reserva.types";
 
 
@@ -44,7 +45,28 @@ export function useReserva() {
     siguiente();
   };
 
-  const finalizarReserva = () => setReservaCompletada(true);
+  const finalizarReserva = async () => {
+    try {
+      await emailjs.send(
+        "service_owi86dp",
+        "template_8w33qgu",
+        {
+          to_email: formData.email,
+          nombre: formData.nombre,
+          espacio: espacioSeleccionado?.nombre,
+          fecha: fecha,
+          hora_inicio: horaInicio,
+          hora_fin: horaFin,
+          personas: personas,
+        },
+        "yP54OHNuhY3buBYKL"
+      );
+    } catch (error){
+      console.error("error enviando correo",error);
+    }
+    setReservaCompletada(true);
+  };
+  
 
   const reiniciar = () => {
     setPaso("espacios");

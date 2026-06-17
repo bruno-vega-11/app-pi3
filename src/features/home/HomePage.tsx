@@ -54,7 +54,7 @@ export function HomePage({ completedCount, allDone, onGoReservas, onGoJuegos }: 
             className="w-full text-left bg-white rounded-3xl p-5 md:p-6 border border-[#E5D9C4] hover:border-[#C8A882] hover:shadow-lg transition-all duration-200 cursor-pointer"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            <div className="text-4xl mb-2">🪑</div>
+            <div className="text-4xl mb-2">🌳</div>
             <h3 className="text-lg font-bold text-[#4A3728]">Reservar un espacio</h3>
             <p className="text-sm text-[#9B7B55] mt-1 leading-relaxed">
               Elige tu rincón favorito en el MAC para relajarte y disfrutar.

@@ -6,7 +6,6 @@ interface ConfirmacionReservaProps {
   fecha: string;
   horaInicio: string;
   horaFin: string;
-  personas: number;
   formData: Partial<ReservaFormData>;
   precioTotal: number;
   completada: boolean;
@@ -16,8 +15,13 @@ interface ConfirmacionReservaProps {
 }
 
 export function ConfirmacionReserva({
+<<<<<<< HEAD
   espacio, fecha, horaInicio, horaFin, personas, formData,
   completada, onConfirmar, onVolver, onNuevaReserva,
+=======
+  espacio, fecha, horaInicio, horaFin, formData,
+  precioTotal, completada, onConfirmar, onVolver, onNuevaReserva,
+>>>>>>> e7b36a1ffd56bed4a44afb59817fddf065c5b14b
 }: ConfirmacionReservaProps) {
   const formatearFecha = (iso: string) => {
     const d = new Date(iso + "T00:00:00");
@@ -42,7 +46,7 @@ export function ConfirmacionReserva({
           <p className="text-[#4A3728] font-semibold">{espacio.nombre}</p>
           <p className="text-sm text-[#7A6A58] capitalize">{formatearFecha(fecha)}</p>
           <p className="text-sm text-[#7A6A58]">
-            {horaInicio} – {horaFin} · {personas} personas
+            {horaInicio} – {horaFin} personas
           </p>
           <p className="text-sm font-semibold text-[#C8A882] mt-1">
             ¡Reserva gratuita gracias a UTEC! 🎓
@@ -76,7 +80,6 @@ export function ConfirmacionReserva({
         </div>
         {fila("Fecha", formatearFecha(fecha))}
         {fila("Horario", `${horaInicio} – ${horaFin}`)}
-        {fila("Personas", `${personas} persona${personas > 1 ? "s" : ""}`)}
         {fila("Nombre", formData.nombre ?? "")}
         {fila("Contacto", formData.email ?? "")}
         {formData.nota && fila("Nota", formData.nota)}

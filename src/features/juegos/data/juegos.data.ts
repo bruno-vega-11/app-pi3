@@ -48,16 +48,23 @@ export const OBRA_ZOOM_CONFIG = {
     { emoji: "📍", text: "Está expuesta en el MAC UTEC" },
   ],
 };
-
+import audioLatente from "../../../audios/Generated Audio June 17, 2026 - 10_51AM.wav";
+import latenteObra from "../../../images/latenteobra.jpg";
 // ═══════════════════════════════════════════════════════════
 //  3. AUDIO — escucha y elige la obra correcta
 // ═══════════════════════════════════════════════════════════
 export const AUDIO_CONFIG = {
-  /** Archivo en public/audio/ → ruta web: /audio/nombre.mp3 */
-  audioSrc: "/audio/audio.mp3",
+  audioSrc: audioLatente,
   description: "Escucha el audio del curador e identifica de qué obra se trata.",
   correctId: "a",
+  artworkSrc: latenteObra,
+  funFact:
+    "Esta pintura juega con tu mente. Si te acercas muchísimo al lienzo, verás que los edificios desaparecen y solo quedan manchas de pintura al óleo abstractas y gruesas. Sin embargo, al dar unos pasos hacia atrás, tu cerebro mágicamente une todos esos colores para construir las calles, las casas y el gran estadio.",
   options: [
+    { id: "a", label: "Latente",              sublabel: "Victor Zuñiga Aedo" },
+    { id: "b", label: "Paisaje Andino",       sublabel: "Jorge Vinatea"       },
+    { id: "c", label: "Abstracción Costera",  sublabel: "Ricardo Grau"        },
+    { id: "d", label: "Espacio Infinito",     sublabel: "Héctor Velarde"      },
     { id: "a", label: "Mareas de Luz", sublabel: "Fernando de Szyszlo" },
     { id: "b", label: "Paisaje Andino", sublabel: "Jorge Vinatea" },
     { id: "c", label: "Abstracción Costera", sublabel: "Ricardo Grau" },

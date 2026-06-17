@@ -199,9 +199,8 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
 
           {audioError && (
             <p className="text-xs text-[#8B3A34] mt-1">
-              No se encontró el archivo. Debe estar en{" "}
-              <code className="text-[10px]">public/audio/</code> y la ruta debe ser{" "}
-              <code className="text-[10px]">{AUDIO_CONFIG.audioSrc}</code>
+              No se pudo cargar el audio. Verifica que el archivo esté en{" "}
+              <code className="text-[10px]">src/audios/</code>.
             </p>
           )}
         </div>
@@ -239,13 +238,33 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
         </div>
 
         {answered && isCorrect && (
-          <button
-            onClick={onComplete}
-            className="w-full text-white font-bold py-3.5 rounded-2xl transition-all text-sm border-none cursor-pointer"
-            style={{ background: "#7BAF8E", fontFamily: "'Poppins', sans-serif" }}
-          >
-            ¡Correcto! Continuar →
-          </button>
+          <div className="space-y-4">
+            <div className="bg-white rounded-2xl p-4 border border-[#E5D9C4] overflow-hidden">
+              <img
+                src={AUDIO_CONFIG.artworkSrc}
+                alt={`Obra ${correctOption?.label} de ${correctOption?.sublabel}`}
+                className="w-full rounded-xl object-contain max-h-72"
+              />
+            </div>
+
+            <div
+              className="rounded-2xl p-4 border border-[#E5D9C4]"
+              style={{ background: "#FBF5EC" }}
+            >
+              <p className="text-xs font-bold text-[#8A6030] uppercase tracking-wide mb-2">
+                💡 Dato curioso
+              </p>
+              <p className="text-sm text-[#4A3728] leading-relaxed">{AUDIO_CONFIG.funFact}</p>
+            </div>
+
+            <button
+              onClick={onComplete}
+              className="w-full text-white font-bold py-3.5 rounded-2xl transition-all text-sm border-none cursor-pointer"
+              style={{ background: "#7BAF8E", fontFamily: "'Poppins', sans-serif" }}
+            >
+              ¡Correcto! Continuar →
+            </button>
+          </div>
         )}
       </main>
     </div>
