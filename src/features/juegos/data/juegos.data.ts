@@ -25,7 +25,7 @@ export const OBRA_ZOOM_CONFIG = {
    * Imagen de la obra en public/obras/
    * Ej: si guardas public/obras/mi-obra.jpg → imageSrc: "/obras/mi-obra.jpg"
    */
-  imageSrc: "/obras/obra_del_dia.jpeg",
+  imageSrc: "/obras/hola.jpg",
   /** Nombre correcto de la obra */
   answer: "CARNAVAL EN SAN JUAN",
   /** Variantes aceptadas (opcional) */

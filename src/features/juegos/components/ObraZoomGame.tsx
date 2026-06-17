@@ -11,22 +11,22 @@ interface ObraZoomGameProps {
 const { imageSrc, answer, acceptedAnswers, maxAttempts, focus, zoomLevels, hints } = OBRA_ZOOM_CONFIG;
 
 function ZoomedObra({ visiblePercent }: { visiblePercent: number }) {
-  const scale = 100 / visiblePercent;
   const originX = focus.x * 100;
   const originY = focus.y * 100;
+  const backgroundSize =
+    visiblePercent >= 100 ? "contain" : `${(100 / visiblePercent) * 100}% auto`;
 
   return (
-    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-2 border-[#E5D9C4] bg-[#FAF5ED]">
-      <img
-        src={imageSrc}
-        alt="Fragmento de obra del MAC"
-        className="w-full h-full object-cover transition-transform duration-700 ease-out"
-        style={{
-          transform: `scale(${scale})`,
-          transformOrigin: `${originX}% ${originY}%`,
-          objectPosition: `${originX}% ${originY}%`,
-        }}
-      />
+    <div
+      role="img"
+      aria-label="Fragmento de obra del MAC"
+      className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-2 border-[#E5D9C4] bg-[#FAF5ED] bg-no-repeat bg-center transition-[background-size,background-position] duration-700 ease-out"
+      style={{
+        backgroundImage: `url(${imageSrc})`,
+        backgroundSize,
+        backgroundPosition: `${originX}% ${originY}%`,
+      }}
+    >
       {visiblePercent < 100 && (
         <div className="absolute bottom-3 right-3 bg-black/50 text-white text-[10px] font-semibold px-2 py-1 rounded-lg">
           Vista {visiblePercent}%
