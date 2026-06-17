@@ -64,11 +64,7 @@ export const AUDIO_CONFIG = {
     { id: "a", label: "Latente",              sublabel: "Victor Zuñiga Aedo" },
     { id: "b", label: "Paisaje Andino",       sublabel: "Jorge Vinatea"       },
     { id: "c", label: "Abstracción Costera",  sublabel: "Ricardo Grau"        },
-    { id: "d", label: "Espacio Infinito",     sublabel: "Héctor Velarde"      },
-    { id: "a", label: "Mareas de Luz", sublabel: "Fernando de Szyszlo" },
-    { id: "b", label: "Paisaje Andino", sublabel: "Jorge Vinatea" },
-    { id: "c", label: "Abstracción Costera", sublabel: "Ricardo Grau" },
-    { id: "d", label: "Espacio Infinito", sublabel: "Héctor Velarde" },
+    { id: "d", label: "Espacio Infinito",     sublabel: "Héctor Velarde"      }
   ],
 };
 
