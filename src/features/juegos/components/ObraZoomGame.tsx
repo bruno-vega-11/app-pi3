@@ -20,7 +20,7 @@ function ZoomedObra({ visiblePercent }: { visiblePercent: number }) {
     <div
       role="img"
       aria-label="Fragmento de obra del MAC"
-      className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-2 border-[#E5D9C4] bg-[#FAF5ED] bg-no-repeat bg-center transition-[background-size,background-position] duration-700 ease-out"
+      className="relative w-full aspect-4/3 rounded-2xl overflow-hidden border-2 border-[#E5D9C4] bg-[#FAF5ED] bg-no-repeat bg-center transition-[background-size,background-position] duration-700 ease-out"
       style={{
         backgroundImage: `url(${imageSrc})`,
         backgroundSize,
@@ -30,6 +30,42 @@ function ZoomedObra({ visiblePercent }: { visiblePercent: number }) {
       {visiblePercent < 100 && (
         <div className="absolute bottom-3 right-3 bg-black/50 text-white text-[10px] font-semibold px-2 py-1 rounded-lg">
           Vista {visiblePercent}%
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ArtworkInfoCard({ won }: { won: boolean }) {
+  return (
+    <div className="space-y-3">
+      <div
+        className="rounded-2xl px-4 py-3 text-sm leading-relaxed"
+        style={{
+          background: won ? "#F0F9EE" : "#FBF5EC",
+          border: `1.5px solid ${won ? "#7BAF8E" : "#D5C5B0"}`,
+          color: won ? "#3D6B35" : "#5A4030",
+        }}
+      >
+        {won ? (
+          <>
+            <span className="font-bold">¡Increíble ojo! 🎨</span>
+            {" "}Reconociste <span className="font-semibold">"{answer}"</span>
+            {OBRA_ZOOM_CONFIG.artist ? ` de ${OBRA_ZOOM_CONFIG.artist}` : ""}. Ahora que ya la conoces, encuéntrala en el MAC UTEC y obsérvala de cerca.
+          </>
+        ) : (
+          <>
+            <span className="font-bold">¡Buen intento! 💪</span>
+            {" "}La obra era <span className="font-semibold">"{answer}"</span>
+            {OBRA_ZOOM_CONFIG.artist ? ` de ${OBRA_ZOOM_CONFIG.artist}` : ""}. Ya la tienes grabada en la memoria — la próxima vez la identificarás enseguida. ¡Visítala en el MAC UTEC!
+          </>
+        )}
+      </div>
+
+      {OBRA_ZOOM_CONFIG.funFact && (
+        <div className="rounded-2xl p-4 border border-[#E5D9C4]" style={{ background: "#FBF5EC" }}>
+          <p className="text-xs font-bold text-[#8A6030] uppercase tracking-wide mb-2">💡 Dato curioso</p>
+          <p className="text-sm text-[#4A3728] leading-relaxed">{OBRA_ZOOM_CONFIG.funFact}</p>
         </div>
       )}
     </div>
@@ -46,7 +82,8 @@ export function ObraZoomGame({ alreadyDone, onComplete, onBack }: ObraZoomGamePr
   );
 
   const gameOver = won || lost || alreadyDone;
-  const visiblePercent = lost ? 100 : zoomLevels[Math.min(wrongCount, zoomLevels.length - 1)];
+  // Reveal full image on win or lose
+  const visiblePercent = (won || lost) ? 100 : zoomLevels[Math.min(wrongCount, zoomLevels.length - 1)];
   const remaining = maxAttempts - wrongCount;
 
   const submit = () => {
@@ -54,7 +91,7 @@ export function ObraZoomGame({ alreadyDone, onComplete, onBack }: ObraZoomGamePr
 
     if (checkAnswer(guess, answer, acceptedAnswers)) {
       setWon(true);
-      setMsg({ text: `🎉 ¡Correcto! Es "${answer}".`, ok: true });
+      setMsg(null);
       return;
     }
 
@@ -64,7 +101,7 @@ export function ObraZoomGame({ alreadyDone, onComplete, onBack }: ObraZoomGamePr
 
     if (nextWrong >= maxAttempts) {
       setLost(true);
-      setMsg({ text: `Era "${answer}". ¡Búscala en el MAC!`, ok: false });
+      setMsg(null);
     } else {
       const nextZoom = zoomLevels[nextWrong];
       setMsg({
@@ -117,6 +154,12 @@ export function ObraZoomGame({ alreadyDone, onComplete, onBack }: ObraZoomGamePr
 
         <ZoomedObra visiblePercent={visiblePercent} />
 
+        {(won || lost) && OBRA_ZOOM_CONFIG.artist && (
+          <p className="text-xs text-[#9B7B55] text-center font-medium -mt-2">
+            {answer} · {OBRA_ZOOM_CONFIG.artist}
+          </p>
+        )}
+
         {msg && (
           <div
             className="rounded-2xl px-4 py-2.5 text-sm font-medium text-center"
@@ -147,6 +190,8 @@ export function ObraZoomGame({ alreadyDone, onComplete, onBack }: ObraZoomGamePr
             </button>
           </div>
         )}
+
+        {(won || lost) && <ArtworkInfoCard won={won} />}
 
         {won && (
           <button

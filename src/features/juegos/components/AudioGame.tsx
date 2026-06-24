@@ -95,13 +95,11 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
     audioRef.current?.pause();
     setSelected(id);
     setAnswered(true);
-    if (id !== AUDIO_CONFIG.correctId) {
-      setTimeout(onComplete, 2200);
-    }
   };
 
   const isCorrect = selected === AUDIO_CONFIG.correctId;
   const correctOption = AUDIO_CONFIG.options.find((o) => o.id === AUDIO_CONFIG.correctId);
+  const selectedOption = AUDIO_CONFIG.options.find((o) => o.id === selected);
 
   const optBorder = (id: string): string => {
     if (!answered) return "#E5D9C4";
@@ -237,24 +235,23 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
           ))}
         </div>
 
+        {/* ── WIN: imagen + dato curioso + continuar ── */}
         {answered && isCorrect && (
           <div className="space-y-4">
             <div className="bg-white rounded-2xl p-4 border border-[#E5D9C4] overflow-hidden">
               <img
-                src={AUDIO_CONFIG.artworkSrc}
-                alt={`Obra ${correctOption?.label} de ${correctOption?.sublabel}`}
+                src={correctOption?.artworkSrc}
+                alt={`${correctOption?.label} — ${correctOption?.sublabel}`}
                 className="w-full rounded-xl object-contain max-h-72"
               />
+              <p className="text-xs text-[#9B7B55] text-center mt-2 font-medium">
+                {correctOption?.label} · {correctOption?.sublabel}
+              </p>
             </div>
 
-            <div
-              className="rounded-2xl p-4 border border-[#E5D9C4]"
-              style={{ background: "#FBF5EC" }}
-            >
-              <p className="text-xs font-bold text-[#8A6030] uppercase tracking-wide mb-2">
-                💡 Dato curioso
-              </p>
-              <p className="text-sm text-[#4A3728] leading-relaxed">{AUDIO_CONFIG.funFact}</p>
+            <div className="rounded-2xl p-4 border border-[#E5D9C4]" style={{ background: "#FBF5EC" }}>
+              <p className="text-xs font-bold text-[#8A6030] uppercase tracking-wide mb-2">💡 Dato curioso</p>
+              <p className="text-sm text-[#4A3728] leading-relaxed">{correctOption?.funFact}</p>
             </div>
 
             <button
@@ -263,6 +260,74 @@ export function AudioGame({ alreadyDone, onComplete, onBack }: AudioGameProps) {
               style={{ background: "#7BAF8E", fontFamily: "'Poppins', sans-serif" }}
             >
               ¡Correcto! Continuar →
+            </button>
+          </div>
+        )}
+
+        {/* ── LOSE: obra elegida vs obra correcta ── */}
+        {answered && !isCorrect && selectedOption && (
+          <div className="space-y-4">
+            {/* Obra elegida erróneamente */}
+            <div className="space-y-2">
+              <p className="text-xs font-bold text-[#8B3A34] uppercase tracking-wide">
+                ❌ Elegiste: {selectedOption.label}
+              </p>
+              {selectedOption.artworkSrc && (
+                <div className="bg-white rounded-2xl p-4 border border-[#F5D8D4] overflow-hidden">
+                  <img
+                    src={selectedOption.artworkSrc}
+                    alt={`${selectedOption.label} — ${selectedOption.sublabel}`}
+                    className="w-full rounded-xl object-contain max-h-56"
+                  />
+                  <p className="text-xs text-[#9B7B55] text-center mt-2 font-medium">
+                    {selectedOption.label} · {selectedOption.sublabel}
+                  </p>
+                </div>
+              )}
+              <div className="rounded-2xl p-3.5 border border-[#F5D8D4]" style={{ background: "#FFF5F4" }}>
+                <p className="text-sm text-[#4A3728] leading-relaxed">
+                  <span className="font-semibold text-[#8B3A34]">Esta obra</span> trata de{" "}
+                  {selectedOption.description.charAt(0).toLowerCase() + selectedOption.description.slice(1)}
+                </p>
+              </div>
+            </div>
+
+            {/* Obra correcta */}
+            <div className="space-y-2">
+              <p className="text-xs font-bold text-[#3D6B35] uppercase tracking-wide">
+                ✅ La correcta era: {correctOption?.label}
+              </p>
+              {correctOption?.artworkSrc && (
+                <div className="bg-white rounded-2xl p-4 border border-[#D8ECD4] overflow-hidden">
+                  <img
+                    src={correctOption.artworkSrc}
+                    alt={`${correctOption.label} — ${correctOption.sublabel}`}
+                    className="w-full rounded-xl object-contain max-h-56"
+                  />
+                  <p className="text-xs text-[#9B7B55] text-center mt-2 font-medium">
+                    {correctOption.label} · {correctOption.sublabel}
+                  </p>
+                </div>
+              )}
+              <div className="rounded-2xl p-3.5 border border-[#D8ECD4]" style={{ background: "#F4FBF4" }}>
+                <p className="text-sm text-[#4A3728] leading-relaxed">
+                  <span className="font-semibold text-[#3D6B35]">La obra correcta</span> representa{" "}
+                  {correctOption?.description.charAt(0).toLowerCase() + (correctOption?.description.slice(1) ?? "")}
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl p-4 border border-[#E5D9C4]" style={{ background: "#FBF5EC" }}>
+              <p className="text-xs font-bold text-[#8A6030] uppercase tracking-wide mb-2">💡 Dato curioso</p>
+              <p className="text-sm text-[#4A3728] leading-relaxed">{correctOption?.funFact}</p>
+            </div>
+
+            <button
+              onClick={onComplete}
+              className="w-full text-white font-bold py-3.5 rounded-2xl transition-all text-sm border-none cursor-pointer"
+              style={{ background: "#C8A882", fontFamily: "'Poppins', sans-serif" }}
+            >
+              Entendido, continuar →
             </button>
           </div>
         )}
